@@ -24,7 +24,7 @@ body {
   gap: 15px;
 }
 
-.btn {
+.btn-jogar {
   padding: 12px 30px;
   font-size: 25px;
   border: none;
@@ -37,8 +37,19 @@ body {
   font-weight: bold;
 }
 
-.btn:hover {
+.btn-jogar:hover {
   transform: scale(1.05);
+}
+
+.btn-jogar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn-jogar img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px; 
 }
 
 .jogar {
@@ -46,5 +57,11 @@ body {
 }
 
 .sobre {
+  background-color: #81C784;
+  padding: 2rem;
+  border-radius: 15px;
+}
+
+.btn-sobre {
   background-color: #81C784;
 }

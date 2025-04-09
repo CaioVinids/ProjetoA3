@@ -3,6 +3,6 @@ document.getElementById('playButton').addEventListener('click', () => {
   });
   
   document.getElementById('aboutButton').addEventListener('click', () => {
-    window.location.href = 'SobreProjeto/SobreProjeto.html';
+    window.location.href = 'SobreProjeto/about.html';
   });
   
