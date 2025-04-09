@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header {
+    background: #D1F7D1;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        color: #333;
+    }
+}
+
+main {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.intro {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.team {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.circle-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.circle {
+    width: 120px;
+    height: 150px; /* Aumenta a altura para caber o nome acima */
+    border-radius: 12px; /* Deixando menos "círculo" e mais card */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding-top: 0.5rem;
+}
+
+.circle p {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 0 0 0.3rem 0;
+    color: #333;
+}
+
+.circle img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 50%;
+}
+
+.sobre p {
+font-size: 18px;
+margin-bottom: 30px;
+}
+
+.devs-container {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 30px;
+}
+
+.dev-card {
+background-color: #fff;
+border-radius: 15px;
+padding: 20px;
+width: 200px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+transition: transform 0.3s ease;
+}
+
+.dev-card:hover {
+transform: scale(1.05);
+}
+
+.dev-card img {
+width: 100%;
+height: auto;
+border-radius: 50%;
+object-fit: cover;
+}
+
+.dev-card h2 {
+margin-top: 15px;
+font-size: 20px;
+}
+
+.dev-card h3 {
+margin-top: 10px;
+font-size: 15px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #333;
+    color: #fff;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
