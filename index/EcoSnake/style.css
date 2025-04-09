@@ -1,28 +1,55 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #d1f7d1;  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .game-container {
-    position: relative;
-    text-align: center;
-  }
-  
-  canvas {
-    border: 2px solid #4caf50; /* Cor verde para o tema ecológico */
-    background-color: #d1f7d1; /* Cor suave para o fundo do jogo */
-  }
-  
-  #score {
-    font-size: 20px;
-    color: #4caf50;
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  
+  font-family: Arial, sans-serif;
+  background-color: #d1f7d1;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.game-container {
+  position: relative;
+  text-align: center;
+}
+
+canvas {
+  border: 2px solid #4caf50; /* Cor verde para o tema ecológico */
+  background-color: #d1f7d1; /* Cor suave para o fundo do jogo */
+}
+
+#score {
+  font-size: 20px;
+  color: #4caf50;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#gameOverScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#gameOverScreen h2 {
+  margin-bottom: 10px;
+}
+
+#gameOverScreen button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

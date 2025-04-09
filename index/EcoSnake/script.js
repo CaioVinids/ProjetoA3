@@ -3,125 +3,162 @@ const ctx = canvas.getContext("2d");
 
 canvas.width = 600;
 canvas.height = 600;
+const foodScale = 1.5; // aumenta 50%
 
-const gridSize = 20;
-let snake = [{ x: 160, y: 160 }];
-let food = spawnFood();
+
+const gridSize = 30; // Tamanho aumentado
+let snake = [{ x: 150, y: 150, color: "#4caf50" }];
 let dx = gridSize;
 let dy = 0;
 let score = 0;
+let gameSpeed = 100;
+let gameLoopTimeout;
+let isGameOver = false;
 
-const snakeColors = ["#FFD700", "#2196F3", "#4caf50", "#F44336", "#874312"];
-let snakeColor = "#4caf50";
-let foodColor = snakeColor;
+const foodTypes = [
+  { name: "plastico", color: "#cb2716", src: "../img/plastico.png" },
+  { name: "metal", color: "#d2ac0f", src: "../img/metal.png" },
+  { name: "papel", color: "#006aa4", src: "../img/papel.png" },
+  { name: "vidro", color: "#295a0f", src: "../img/vidro.png" },
+  { name: "maca", color: "#8b6139", src: "../img/maca.png" }
+];
 
-let lastDirection = { dx: gridSize, dy: 0 };
+const foodImages = {};
+foodTypes.forEach(type => {
+  const img = new Image();
+  img.src = type.src;
+  foodImages[type.name] = img;
+});
 
-function getRandomColor() {
-  const randomIndex = Math.floor(Math.random() * snakeColors.length);
-  return snakeColors[randomIndex];
-}
+let nextFoodType = getRandomFoodType();
+let currentFood = spawnFood(nextFoodType);
 
 function drawSnake() {
-  ctx.fillStyle = snakeColor;
-  snake.forEach((segment) => {
+  snake.forEach(segment => {
+    ctx.fillStyle = segment.color;
     ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
   });
 }
 
 function drawFood() {
-  ctx.fillStyle = foodColor;
-  ctx.fillRect(food.x, food.y, gridSize, gridSize);
+  const image = foodImages[currentFood.type.name];
+  const size = gridSize * foodScale;
+  const offset = (size - gridSize) / 2;
+
+  ctx.drawImage(
+    image,
+    currentFood.x - offset,
+    currentFood.y - offset,
+    size,
+    size
+  );
 }
+
 
 function updateScore() {
   document.getElementById("scoreValue").textContent = score;
 }
 
 function moveSnake() {
-  const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-  lastDirection = { dx, dy };
+  if (isGameOver) return;
 
-  // Wall collision
-  if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+  const headX = snake[0].x + dx;
+  const headY = snake[0].y + dy;
+
+  if (headX < 0 || headX >= canvas.width || headY < 0 || headY >= canvas.height) {
     gameOver();
     return;
   }
 
-  // Self collision
   for (let i = 1; i < snake.length; i++) {
-    if (snake[i].x === head.x && snake[i].y === head.y) {
+    if (snake[i].x === headX && snake[i].y === headY) {
       gameOver();
       return;
     }
   }
 
-  snake.unshift(head);
+  const newHead = { x: headX, y: headY, color: currentFood.type.color };
+  snake.unshift(newHead);
 
-  // Eat food
-  if (head.x === food.x && head.y === food.y) {
+  if (headX === currentFood.x && headY === currentFood.y) {
     score++;
     updateScore();
-    food = spawnFood();
-    snakeColor = getRandomColor();
-    foodColor = snakeColor;
+
+    if (score % 10 === 0 && gameSpeed > 50) {
+      gameSpeed -= 5;
+    }
+
+    nextFoodType = getRandomFoodType();
+    currentFood = spawnFood(nextFoodType);
   } else {
     snake.pop();
   }
 }
 
-function spawnFood() {
-  let newFood;
-  while (true) {
-    const x = Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize;
-    const y = Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize;
-    newFood = { x, y };
+function getRandomFoodType() {
+  const type = foodTypes[Math.floor(Math.random() * foodTypes.length)];
+  console.log(`Próxima comida: ${type.name} (${type.color})`);
+  return type;
+}
 
-    const overlap = snake.some(segment => segment.x === x && segment.y === y);
-    if (!overlap) break;
-  }
-  return newFood;
+function spawnFood(type) {
+  const maxX = Math.floor(canvas.width / gridSize);
+  const maxY = Math.floor(canvas.height / gridSize);
+  const x = Math.floor(Math.random() * maxX) * gridSize;
+  const y = Math.floor(Math.random() * maxY) * gridSize;
+  return { x, y, type };
 }
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  moveSnake();
   drawSnake();
   drawFood();
-  moveSnake();
 }
 
 function gameOver() {
-  alert("Fim de jogo! Pontuação final: " + score);
-  snake = [{ x: 160, y: 160 }];
+  clearTimeout(gameLoopTimeout);
+  isGameOver = true;
+  document.getElementById("finalScoreText").textContent = `Pontuação final: ${score}`;
+  document.getElementById("finalSpeedText").textContent = `Velocidade: ${Math.round(1000 / gameSpeed)} FPS`;
+  document.getElementById("gameOverScreen").style.display = "flex";
+}
+
+function restartGame() {
+  snake = [{ x: 150, y: 150, color: "#4caf50" }];
   dx = gridSize;
   dy = 0;
   score = 0;
+  gameSpeed = 100;
+  isGameOver = false;
   updateScore();
-  snakeColor = "#4caf50";
-  foodColor = snakeColor;
+  nextFoodType = getRandomFoodType();
+  currentFood = spawnFood(nextFoodType);
+  document.getElementById("gameOverScreen").style.display = "none";
+  gameLoop();
 }
 
 document.addEventListener("keydown", (event) => {
-  const { dx: lastDx, dy: lastDy } = lastDirection;
-
-  if (event.key === "ArrowUp" && lastDy === 0) {
+  if (isGameOver) return;
+  if (event.key === "ArrowUp" && dy === 0) {
     dx = 0;
     dy = -gridSize;
-  } else if (event.key === "ArrowDown" && lastDy === 0) {
+  } else if (event.key === "ArrowDown" && dy === 0) {
     dx = 0;
     dy = gridSize;
-  } else if (event.key === "ArrowLeft" && lastDx === 0) {
+  } else if (event.key === "ArrowLeft" && dx === 0) {
     dx = -gridSize;
     dy = 0;
-  } else if (event.key === "ArrowRight" && lastDx === 0) {
+  } else if (event.key === "ArrowRight" && dx === 0) {
     dx = gridSize;
     dy = 0;
   }
 });
 
 function gameLoop() {
+  if (isGameOver) return;
   draw();
-  setTimeout(gameLoop, 100);
+  gameLoopTimeout = setTimeout(gameLoop, gameSpeed);
 }
 
 gameLoop();
