@@ -5,123 +5,148 @@ canvas.width = 600;
 canvas.height = 600;
 
 const gridSize = 20;
-let snake = [{ x: 160, y: 160 }];
-let food = spawnFood();
+let snake = [{ x: 160, y: 160, color: "#4caf50" }];
 let dx = gridSize;
 let dy = 0;
 let score = 0;
+let gameSpeed = 100; // Velocidade inicial em ms (100ms por frame)
 
-const snakeColors = ["#FFD700", "#2196F3", "#4caf50", "#F44336", "#874312"];
-let snakeColor = "#4caf50";
-let foodColor = snakeColor;
+// Tipos de comida com nome, cor e imagem
+const foodTypes = [
+  { name: "plastico", color: "#cb2716", src: "../img/plastico.png" },
+  { name: "metal", color: "#d2ac0f", src: "../img/metal.png" },
+  { name: "papel", color: "#006aa4", src: "../img/papel.png" },
+  { name: "vidro", color: "#295a0f", src: "../img/vidro.png" },
+  { name: "maca", color: "#8b6139", src: "../img/maca.png" }
+];
 
-let lastDirection = { dx: gridSize, dy: 0 };
+// Carrega imagens das comidas
+const foodImages = {};
+foodTypes.forEach(type => {
+  const img = new Image();
+  img.src = type.src;
+  foodImages[type.name] = img;
+});
 
-function getRandomColor() {
-  const randomIndex = Math.floor(Math.random() * snakeColors.length);
-  return snakeColors[randomIndex];
-}
+// Inicializa com uma comida aleatória
+let nextFoodType = getRandomFoodType();
+let currentFood = spawnFood(nextFoodType);
 
+// Desenha a cobra com rastro colorido
 function drawSnake() {
-  ctx.fillStyle = snakeColor;
-  snake.forEach((segment) => {
+  snake.forEach(segment => {
+    ctx.fillStyle = segment.color;
     ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
   });
 }
 
+// Desenha a comida
 function drawFood() {
-  ctx.fillStyle = foodColor;
-  ctx.fillRect(food.x, food.y, gridSize, gridSize);
+  const image = foodImages[currentFood.type.name];
+  ctx.drawImage(image, currentFood.x, currentFood.y, gridSize, gridSize);
 }
 
+// Atualiza pontuação na tela
 function updateScore() {
   document.getElementById("scoreValue").textContent = score;
 }
 
+// Move a cobra e lida com colisões
 function moveSnake() {
-  const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-  lastDirection = { dx, dy };
+  const headX = snake[0].x + dx;
+  const headY = snake[0].y + dy;
 
-  // Wall collision
-  if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+  // Colisão com parede
+  if (headX < 0 || headX >= canvas.width || headY < 0 || headY >= canvas.height) {
     gameOver();
     return;
   }
 
-  // Self collision
+  // Colisão com o próprio corpo
   for (let i = 1; i < snake.length; i++) {
-    if (snake[i].x === head.x && snake[i].y === head.y) {
+    if (snake[i].x === headX && snake[i].y === headY) {
       gameOver();
       return;
     }
   }
 
-  snake.unshift(head);
+  // Cria a nova cabeça com a cor da comida que vai aparecer
+  const newHead = { x: headX, y: headY, color: currentFood.type.color };
+  snake.unshift(newHead);
 
-  // Eat food
-  if (head.x === food.x && head.y === food.y) {
+  // Se comeu a comida
+  if (headX === currentFood.x && headY === currentFood.y) {
     score++;
     updateScore();
-    food = spawnFood();
-    snakeColor = getRandomColor();
-    foodColor = snakeColor;
+
+    // Aumenta a velocidade a cada 5 comidas, até um limite
+    if (score % 10 === 0 && gameSpeed > 50) {
+      gameSpeed -= 5;
+    }
+
+    nextFoodType = getRandomFoodType();      // Define próxima comida
+    currentFood = spawnFood(nextFoodType);   // Aparece na tela
   } else {
-    snake.pop();
+    snake.pop(); // Remove a cauda se não comeu
   }
 }
 
-function spawnFood() {
-  let newFood;
-  while (true) {
-    const x = Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize;
-    const y = Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize;
-    newFood = { x, y };
-
-    const overlap = snake.some(segment => segment.x === x && segment.y === y);
-    if (!overlap) break;
-  }
-  return newFood;
+// Sorteia novo tipo de comida
+function getRandomFoodType() {
+  const type = foodTypes[Math.floor(Math.random() * foodTypes.length)];
+  console.log(`Próxima comida: ${type.name} (${type.color})`);
+  return type;
 }
 
+// Gera nova comida com tipo específico
+function spawnFood(type) {
+  const x = Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize;
+  const y = Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize;
+  return { x, y, type };
+}
+
+// Desenha tudo em ordem correta
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawSnake();
-  drawFood();
-  moveSnake();
+  moveSnake();    // Atualiza lógica do jogo
+  drawSnake();    // Cobra com cores corretas
+  drawFood();     // Desenha comida atual
 }
 
+// Fim de jogo
 function gameOver() {
   alert("Fim de jogo! Pontuação final: " + score);
-  snake = [{ x: 160, y: 160 }];
+  snake = [{ x: 160, y: 160, color: "#4caf50" }];
   dx = gridSize;
   dy = 0;
   score = 0;
+  gameSpeed = 100; // Reseta velocidade
   updateScore();
-  snakeColor = "#4caf50";
-  foodColor = snakeColor;
+  nextFoodType = getRandomFoodType();
+  currentFood = spawnFood(nextFoodType);
 }
 
+// Teclas de controle
 document.addEventListener("keydown", (event) => {
-  const { dx: lastDx, dy: lastDy } = lastDirection;
-
-  if (event.key === "ArrowUp" && lastDy === 0) {
+  if (event.key === "ArrowUp" && dy === 0) {
     dx = 0;
     dy = -gridSize;
-  } else if (event.key === "ArrowDown" && lastDy === 0) {
+  } else if (event.key === "ArrowDown" && dy === 0) {
     dx = 0;
     dy = gridSize;
-  } else if (event.key === "ArrowLeft" && lastDx === 0) {
+  } else if (event.key === "ArrowLeft" && dx === 0) {
     dx = -gridSize;
     dy = 0;
-  } else if (event.key === "ArrowRight" && lastDx === 0) {
+  } else if (event.key === "ArrowRight" && dx === 0) {
     dx = gridSize;
     dy = 0;
   }
 });
 
+// Loop principal com velocidade variável
 function gameLoop() {
   draw();
-  setTimeout(gameLoop, 100);
+  setTimeout(gameLoop, gameSpeed);
 }
 
 gameLoop();
