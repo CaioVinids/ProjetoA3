@@ -1,8 +1,8 @@
 document.getElementById('playButton').addEventListener('click', () => {
-    window.location.href = 'EcoSnake/Game.html';
+    window.location.href = 'game/game.html';
   });
   
   document.getElementById('aboutButton').addEventListener('click', () => {
-    window.location.href = 'SobreProjeto/SobreProjeto.html';
+    window.location.href = 'about/about.html';
   });
   
