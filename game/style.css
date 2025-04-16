@@ -51,7 +51,10 @@ canvas {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    font-size: 22px; /* 👈 tamanho da fonte aumentado */
   }
+  
+  
   
   #gameOverScreen h2 {
     margin-bottom: 10px;
@@ -78,5 +81,5 @@ canvas {
     height: auto;
     border: 3px solid #4caf50;
     border-radius: 10px;
+                
   }
-  
