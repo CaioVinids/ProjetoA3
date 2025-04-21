@@ -1,50 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobre o Projeto</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <!-- Cabeçalho -->
   <header class="header">
-    <h1>Sobre o projeto</h1>
-    <button class="inicio-btn">🏠 Início</button>
+    <div class="header-content">
+      <h1>Sobre o projeto</h1>
+      <a href="../index.html" class="inicio-btn">🏠 Início</a>
+    </div>
   </header>
 
-  <div class="container">
-    <main class="card">
-      <section>
-        <h2>Nossa missão</h2>
-        <p>Este projeto visa desenvolver soluções inovadoras que atendam as necessidades dos usuários, promovendo a
-          sustentabilidade e a eficiencia em todos os aspectos.</p>
+  <!-- Conteúdo Principal -->
+  <main class="container">
+    <article class="card">
+
+      <!-- Seção Missão -->
+      <section class="mission-section">
+        <div class="mission-container">
+          <div class="mission-header">
+            <h2>Nossa <span class="highlight">Missão</span></h2>
+            <!-- <div class="divider"></div> -->
+          </div>
+          
+          <div class="mission-content">
+            <p class="mission-lead">No coração do nosso projeto está a <strong>transformação digital da educação ambiental</strong>. Acreditamos que a sustentabilidade pode - e deve - ser divertida, acessível e viciante como um bom jogo!</p>
+            
+            <div class="mission-card">
+              <div class="mission-card-content">
+                <h3>Por que o jogo da cobrinha sustentável?</h3>
+                <p>Reinventamos o clássico jogo da cobrinha para criar uma <strong>experiência imersiva</strong> que:</p>
+                <ul class="mission-list">
+                  <li>Ensina a separação correta de resíduos de forma intuitiva</li>
+                  <li>Mostra o impacto real da reciclagem no meio ambiente</li>
+                  <li>Torna o aprendizado ambiental tão envolvente quanto os melhores games</li>
+                  <li>Transforma jogadores em agentes de mudança</li>
+                </ul>
+              </div>
+              <div class="mission-card-image">
+                <img src="../imgs/exemplo1.png" alt="Exemplo do jogo da cobrinha sustentável">
+              </div>
+            </div>
+            
+            <div class="mission-values">
+              <h3>Valores que nos guiam:</h3>
+              <div class="values-grid">
+                <div class="value-item">
+                  <div class="value-icon">🌍</div>
+                  <h4>Impacto Real</h4>
+                  <p>Cada ponto no jogo representa conhecimento aplicável no mundo real</p>
+                </div>
+                <div class="value-item">
+                  <div class="value-icon">🎯</div>
+                  <h4>Objetivos Claros</h4>
+                  <p>Alinhamento direto com os ODS da ONU para um futuro sustentável</p>
+                </div>
+                <div class="value-item">
+                  <div class="value-icon">💡</div>
+                  <h4>Inovação Contínua</h4>
+                  <p>Jogabilidade que evolui com as necessidades ambientais</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>     
       </section>
 
-      <hr className="section-divider" />
+      <!-- <hr class="section-divider"> -->
 
-      <section>
-        <h2>Sobre Nós</h2>
-        <p>Conheça a equipe de desenvolvedores por trás deste projeto</p>
+      <!-- Seção Equipe -->
+      <section class="team-section">
+        <h2>Conheça nossa equipe</h2>
         <div class="team-grid">
           <div class="profile">
-            <!-- perfis aqui -->
             <img src="../imgs/dallison.png" alt="Dallison Silveira">
             <h3>Dallison Silveira</h3>
-            <p>Desenvolvedor Back-End e Front-End</p>
+            <p>Desenvolvedor Full Stack</p>
           </div>
 
           <div class="profile">
             <img src="../imgs/thales.png" alt="Thales Dionizio">
             <h3>Thales Dionizio</h3>
-            <p>Desenvolvedor Back-End e Front-End</p>
+            <p>Desenvolvedor Full Stack</p>
           </div>
 
           <div class="profile">
             <img src="../imgs/caio.png" alt="Caio Vinicius">
             <h3>Caio Vinicius</h3>
-            <p>Designer / Desenvolvedor Front-End</p>
+            <p>Designer Front-End</p>
           </div>
 
           <div class="profile">
@@ -63,40 +111,61 @@
             <img src="../imgs/ods4.png" alt="Kevin Santos">
             <h3>Kevin Santos</h3>
             <p>Desenvolvedor Back-End</p>
-
           </div>
+        </div>
       </section>
 
-      <hr className="section-divider" />
+      <!-- <hr class="section-divider"> -->
 
-      <section>
-        <h2>ODS</h2>
-        <p>Estamos comprometidos com os Objetivos de Desenvolvimento Sustentável (ODS) da ONU, buscando contribuir para
-          um futuro mais sustentável e igualitário. Nossas soluções são projetadas para alinhar-se a esses objetivos,
-          promovendo um impacto positivo na sociedade e no meio ambiente.</p>
-
-        <p>As ODS que mais se alinham com nosso projeto incluem:</p><br>
-
+      <!-- Seção ODS -->
+      <section class="ods-section">
+        <h2>Objetivos de Desenvolvimento Sustentável</h2>
+        <p>Nosso jogo da cobrinha sustentável se alinha com as seguintes ODS da ONU:</p>
+        
         <div class="ods-images">
-          <img src="../imgs/ods4.png" alt="ODS 4">
-          <img src="../imgs/ods11.png" alt="ODS 11">
-          <img src="../imgs/ods12.png" alt="ODS 12">
-          <img src="../imgs/ods13.png" alt="ODS 13">
-        </div><br>
-        <p>
-          Para mais informações sobre as ODS, visite o site oficial da ONU:
-          <a href="https://brasil.un.org/pt-br/sdgs?afd_azwaf_tok=eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJicmFzaWwudW4ub3JnIiwiZXhwIjoxNzQ0NzI3NTU4LCJpYXQiOjE3NDQ3Mjc1NDgsImlzcyI6InRpZXIxLTVmNTZiNDQ4OTgtcGJ0YzUiLCJzdWIiOiI0Mjg6NGMwMTphMjAwOmI2MjA6MWVmODplMzQ2OjE1ZjY6ODA3MSIsImRhdGEiOnsidHlwZSI6Imlzc3VlZCIsInJlZiI6IjIwMjUwNDE1VDE0MzIyOFotMTVmNTZiNDQ4OThwYnRjNWhDMVNBT3ZlMzAwMDAwMDAwMnNnMDAwMDAwMDA2cG1rIiwiYiI6Imx3eHBsSWZnWkppMUk3akFsUUMxdE9DY0FOTWNUQm9yMXVKRUZQQlJDa1UiLCJoIjoiaXc0Ny1Ua1pDajc1VFdPOVlmWHdnVUZ0azVXM0JRZjBwaHNCbzlJemZCSSJ9fQ.ohexG7ArYQITJEVSuT8wmRCpXVttlDArhi-OeEUU1vLbuQA0j_TJxfYCSISYpX3bO4sVu-0CEOvxUSijVSPtMuFnw8RvrlntrQ4gkbWI2AfoeoeMrR1988WoeDZP2ybNcF5Q0W4trb_DPl1ivr6wQ33EdaBZJrpIxnknjh5OuoWJOvl0u-LJxIp7Tac3PHQQX_K3kQLYtE9QtkeOmWc7gNbLgJbKZmqBIDNkSY7q_GFtWVi6iI2C24MbwJMJvxXIb00ikOAxsHknmuL2eTUwEny7LERo5dIE9qauk1yslAYvGFntjK7MWSJhA2PvN_U59cp2Ujk1FJ6xMaUC5Zd9EQ.WF3obl2IDtqgvMFRqVdYkD5s"
-            target="_blank">Objetivos de Desenvolvimento Sustentável</a>
+          <img src="../imgs/ods4.png" alt="ODS 4 - Educação de Qualidade" data-ods="4">
+          <img src="../imgs/ods11.png" alt="ODS 11 - Cidades Sustentáveis" data-ods="11">
+          <img src="../imgs/ods12.png" alt="ODS 12 - Consumo Responsável" data-ods="12">
+          <img src="../imgs/ods13.png" alt="ODS 13 - Ação Climática" data-ods="13">
+        </div>
+
+        <p class="ods-link">
+          Saiba mais sobre as ODS no site oficial da ONU:
+          <a href="https://brasil.un.org/pt-br/sdgs" target="_blank" rel="noopener noreferrer">Objetivos de Desenvolvimento Sustentável</a>
         </p>
       </section>
-    </main>
+    </article>
+  </main>
+
+  <!-- Modal ODS -->
+  <div id="odsModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="ods-title">Título da ODS</h2>
+      <img id="ods-img" src="" alt="Imagem ODS" class="modal-ods-image">
+      
+      <div class="ods-details">
+        <p id="ods-description">Descrição da ODS</p>
+        
+        <div id="ods-game-connection" class="game-connection">
+          <h3>Como esta ODS se relaciona com nosso jogo:</h3>
+          <p id="ods-game-text"></p>
+          <img id="ods-game-img" src="" alt="Exemplo no jogo" class="game-example-img">
+        </div>
+        
+        <div class="recycling-info">
+          <h3>Dicas de Reciclagem Relacionadas:</h3>
+          <ul id="ods-recycling-tips"></ul>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Rodapé -->
   <footer class="footer">
-    © 2025 ProjetoA3. All rights reserved
+    <p>© 2025 ProjetoA3. Todos os direitos reservados</p>
   </footer>
 
   <script src="script.js"></script>
 </body>
-
 </html>
