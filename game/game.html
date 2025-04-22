@@ -19,10 +19,20 @@
 
       <div id="gameOverScreen" style="display: none;">
         <h2>Fim de Jogo</h2>
+        <p>Lembre-se de comer apenas o que estiver na cor da legenda!</p>
         <p id="finalScoreText"></p>
         <div id="finalStats"></div>
         <button onclick="restartGame()">Reiniciar</button>
       </div>
+
+      <div id="nextLevelScreen" style="display: none;">
+        <h2>Você passou de fase!!</h2>
+        <p>A fase seguinte ficará mais difícil.<br>Lembre-se de comer apenas o que estiver na cor da legenda!</p>
+        <p>Lembre-se também de usar a legenda!</p> 
+        <div id="levelStats"></div>
+        <button onclick="continueToNextLevel()">Continuar</button>
+      </div>
+      
     </div>
   </div>
 
