@@ -11,19 +11,30 @@ let dx = gridSize;
 let dy = 0;
 let score = 0;
 let level = 1;
-let gameSpeed = 100;
+let gameSpeed = 150;
 let gameLoopTimeout;
 let isGameOver = false;
 
 let foodsOnScreen = [];
 let snakeColorType = null;
+let isWaitingRestart = false;
+let isWaitingNextLevel = false;
+
+
+let foodCountByType = {
+  plastico: 0,
+  metal: 0,
+  papel: 0,
+  vidro: 0,
+  organico: 0
+};
 
 const foodTypes = [
   { name: "plastico", color: "#cb2716", src: "../imgs/plastico.png" },
   { name: "metal", color: "#d2ac0f", src: "../imgs/metal.png" },
   { name: "papel", color: "#006aa4", src: "../imgs/papel.png" },
   { name: "vidro", color: "#295a0f", src: "../imgs/vidro.png" },
-  { name: "maca", color: "#8b6139", src: "../imgs/maca.png" }
+  { name: "organico", color: "#8b6139", src: "../imgs/maca.png" }
 ];
 
 const foodImages = {};
@@ -92,6 +103,7 @@ function moveSnake() {
   if (level === 1) {
     if (headX === currentFood.x && headY === currentFood.y) {
       ateFood = true;
+      foodCountByType[currentFood.type.name]++;
     }
   } else {
     for (let food of foodsOnScreen) {
@@ -101,6 +113,7 @@ function moveSnake() {
           return;
         }
         ateFood = true;
+        foodCountByType[food.type.name]++;
         break;
       }
     }
@@ -113,7 +126,10 @@ function moveSnake() {
     if (score % 10 === 0) {
       level++;
       updateLevelDisplay();
+      showNextLevelScreen();
+      return;
     }
+    
 
     if (score % 10 === 0 && gameSpeed > 50) {
       gameSpeed -= 5;
@@ -133,8 +149,7 @@ function moveSnake() {
 }
 
 function getRandomFoodType() {
-  const type = foodTypes[Math.floor(Math.random() * foodTypes.length)];
-  return type;
+  return foodTypes[Math.floor(Math.random() * foodTypes.length)];
 }
 
 function spawnFood(type) {
@@ -147,19 +162,30 @@ function spawnFood(type) {
 
 function prepareMultiFoodLevel() {
   foodsOnScreen = [];
-
-  const foodCount = Math.min(level, foodTypes.length); // até 5 tipos no máximo
+  const foodCount = Math.min(level, foodTypes.length);
   const usedTypes = new Set();
 
   while (foodsOnScreen.length < foodCount) {
     const type = getRandomFoodType();
-    if (!usedTypes.has(type.name)) {
-      foodsOnScreen.push(spawnFood(type));
+    if (usedTypes.has(type.name)) continue;
+
+    let food;
+    let tries = 0;
+    do {
+      food = spawnFood(type);
+      tries++;
+    } while (
+      isOccupied(food.x, food.y) &&
+      tries < 50 // evita loop infinito em caso de tela cheia
+    );
+
+    if (tries < 50) {
+      foodsOnScreen.push(food);
       usedTypes.add(type.name);
     }
   }
 
-  // Define a cor da cobra com base em uma das comidas na tela
+  // Define a cor da cobra com base em um dos alimentos
   snakeColorType = foodsOnScreen[Math.floor(Math.random() * foodsOnScreen.length)].type;
 
   if (snake.length > 0) {
@@ -178,9 +204,19 @@ function draw() {
 function gameOver() {
   clearTimeout(gameLoopTimeout);
   isGameOver = true;
+
   document.getElementById("finalScoreText").textContent = `Pontuação final: ${score}`;
-  document.getElementById("finalSpeedText").textContent = `Velocidade: ${Math.round(1000 / gameSpeed)} FPS`;
-  document.getElementById("gameOverScreen").style.display = "flex";
+
+  const statsDiv = document.getElementById("finalStats");
+  statsDiv.innerHTML = "<h3>Itens coletados:</h3><ul>" +
+    Object.entries(foodCountByType)
+      .map(([type, count]) => `<li><strong>${type}:</strong> ${count}</li>`)
+      .join("") +
+    "</ul>";
+
+    document.getElementById("gameOverScreen").style.display = "flex";
+    isWaitingRestart = true;
+    
 }
 
 function restartGame() {
@@ -193,6 +229,13 @@ function restartGame() {
   isGameOver = false;
   foodsOnScreen = [];
   snakeColorType = null;
+  foodCountByType = {
+    plastico: 0,
+    metal: 0,
+    papel: 0,
+    vidro: 0,
+    organico: 0
+  };
   updateScore();
   updateLevelDisplay();
   nextFoodType = getRandomFoodType();
@@ -201,11 +244,84 @@ function restartGame() {
   gameLoop();
 }
 
-document.addEventListener("keydown", (event) => {
+function gameLoop() {
   if (isGameOver) return;
+  draw();
+  gameLoopTimeout = setTimeout(gameLoop, gameSpeed);
+}
+
+updateScore();
+updateLevelDisplay();
+gameLoop();
+
+function showNextLevelScreen() {
+  clearTimeout(gameLoopTimeout);
+  isGameOver = true;
+
+  const statsDiv = document.getElementById("levelStats");
+  statsDiv.innerHTML = "<h3>Itens coletados até agora:</h3><ul>" +
+    Object.entries(foodCountByType)
+      .map(([type, count]) => `<li><strong>${type}:</strong> ${count}</li>`)
+      .join("") +
+    "</ul>";
+
+    document.getElementById("nextLevelScreen").style.display = "flex";
+    isWaitingNextLevel = true;
+    
+}
+
+function continueToNextLevel() {
+  isGameOver = false;
+  document.getElementById("nextLevelScreen").style.display = "none";
+
+  if (gameSpeed > 50) {
+    gameSpeed -= 5;
+  }
+
+  if (level === 1) {
+    nextFoodType = getRandomFoodType();
+    currentFood = spawnFood(nextFoodType);
+    snake[0].color = currentFood.type.color;
+  } else {
+    prepareMultiFoodLevel();
+  }
+
+  gameLoop();
+}
+
+function isOccupied(x, y) {
+  // Verifica se colide com a cobra
+  for (let segment of snake) {
+    if (segment.x === x && segment.y === y) return true;
+  }
+
+  // Verifica se colide com outros alimentos já posicionados
+  for (let food of foodsOnScreen) {
+    if (food.x === x && food.y === y) return true;
+  }
+
+  return false;
+}
+
+
+document.addEventListener("keydown", (event) => {
+  if (isWaitingRestart) {
+    isWaitingRestart = false;
+    restartGame();
+    return;
+  }
+
+  if (isWaitingNextLevel) {
+    isWaitingNextLevel = false;
+    continueToNextLevel();
+    return;
+  }
+
+  if (isGameOver) return;
+
   if (event.key === "ArrowUp" && dy === 0) {
     dx = 0;
-    dy = -gridSize;
+    dy = -gridSize; 
   } else if (event.key === "ArrowDown" && dy === 0) {
     dx = 0;
     dy = gridSize;
@@ -217,13 +333,3 @@ document.addEventListener("keydown", (event) => {
     dy = 0;
   }
 });
-
-function gameLoop() {
-  if (isGameOver) return;
-  draw();
-  gameLoopTimeout = setTimeout(gameLoop, gameSpeed);
-}
-
-updateScore();
-updateLevelDisplay();
-gameLoop();
