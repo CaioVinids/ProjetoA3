@@ -28,58 +28,85 @@ canvas {
   font-weight: bold;
 }
 
-  .main-layout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    gap: 30px;
-    position: relative;
-  }
-  
+.main-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 30px;
+  position: relative;
+}
 
-  #gameOverScreen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    font-size: 22px; /* 👈 tamanho da fonte aumentado */
-  }
-  
-  
-  
-  #gameOverScreen h2 {
-    margin-bottom: 10px;
-  }
-  
-  #gameOverScreen button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .side-image {
-    position: absolute;
-    top: 200px;
-    right: 50px;
-  }
-  
-  .side-image img {
-    max-width: 400px;
-    height: auto;
-    border: 3px solid #4caf50;
-    border-radius: 10px;
-                
-  }
+
+#gameOverScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 22px;
+  /* 👈 tamanho da fonte aumentado */
+}
+
+
+
+#gameOverScreen h2 {
+  margin-bottom: 10px;
+}
+
+#gameOverScreen button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.side-image {
+  position: absolute;
+  top: 200px;
+  right: 50px;
+}
+
+.side-image img {
+  max-width: 400px;
+  height: auto;
+  border: 3px solid #4caf50;
+  border-radius: 10px;
+
+}
+
+#nextLevelScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 22px;
+}
+
+#nextLevelScreen button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
