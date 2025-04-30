@@ -22,7 +22,7 @@ body {
   color: white;
   width: 100%;
   padding: 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
@@ -54,13 +54,13 @@ body {
   white-space: nowrap;
   margin-left: 20px;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .inicio-btn:hover {
   background: #e0f2f1;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* ----------------------- */
@@ -72,9 +72,11 @@ body {
 /* ----------------------- */
 
 .mission-section {
-  padding: 20px 0; /* Reduzi o padding vertical */
+  padding: 20px 0;
+  /* Reduzi o padding vertical */
   background: linear-gradient(to bottom, #f8fff8, #ffffff);
-  margin: 10px 0; /* Reduzi a margem */
+  margin: 10px 0;
+  /* Reduzi a margem */
 }
 
 .mission-container {
@@ -85,13 +87,17 @@ body {
 
 .mission-header {
   text-align: center;
-  margin-bottom: 30px; /* Reduzi o espaçamento */
-  padding-top: 10px; /* Adicionei um pequeno padding */
+  margin-bottom: 30px;
+  /* Reduzi o espaçamento */
+  padding-top: 10px;
+  /* Adicionei um pequeno padding */
 }
 
 .mission-header h2 {
-  font-size: 2rem; /* Reduzi um pouco o tamanho */
-  margin-bottom: 10px; /* Espaçamento menor */
+  font-size: 2rem;
+  /* Reduzi um pouco o tamanho */
+  margin-bottom: 10px;
+  /* Espaçamento menor */
 }
 
 .highlight {
@@ -143,7 +149,7 @@ body {
   max-width: 90%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .mission-list {
@@ -189,7 +195,7 @@ body {
   background: white;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
 }
 
@@ -219,16 +225,16 @@ body {
   .mission-card {
     flex-direction: column;
   }
-  
+
   .mission-card-image {
     padding: 20px;
   }
-  
+
   .mission-lead {
     font-size: 1.1rem;
     padding: 0 20px;
   }
-  
+
   .values-grid {
     grid-template-columns: 1fr;
   }
@@ -293,16 +299,18 @@ body {
   border-radius: 12px;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   background: white;
-  width: 200px; /* Largura fixa para cada card */
-  margin: 0 auto; /* Centraliza cada card individualmente */
+  width: 200px;
+  /* Largura fixa para cada card */
+  margin: 0 auto;
+  /* Centraliza cada card individualmente */
 }
 
 .profile:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-color: #047857;
 }
 
@@ -367,7 +375,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(3px);
 }
 
@@ -378,7 +386,7 @@ body {
   border-radius: 16px;
   width: 80%;
   max-width: 800px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   position: relative;
   animation: fadeInZoom 0.4s ease-out;
 }
@@ -451,7 +459,7 @@ body {
   display: block;
   border-radius: 10px;
   border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .recycling-info {
@@ -504,6 +512,7 @@ body {
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -518,29 +527,29 @@ body {
   .container {
     padding: 15px;
   }
-  
+
   .card {
     padding: 20px;
   }
-  
+
   .team-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
-  
+
   .profile {
     width: 180px;
   }
-  
+
   .modal-content {
     width: 90%;
     padding: 20px;
     margin: 10% auto;
   }
-  
+
   .modal-ods-image {
     width: 150px;
   }
-  
+
   .ods-images img {
     width: 120px;
     height: 120px;
@@ -563,21 +572,21 @@ body {
     width: 100%;
     text-align: center;
   }
-  
+
   .team-grid {
     grid-template-columns: 1fr;
     max-width: 300px;
   }
-  
+
   .profile {
     width: 100%;
   }
-  
+
   .modal-content {
     width: 95%;
     padding: 15px;
   }
-  
+
   #ods-title {
     font-size: 1.5rem;
   }

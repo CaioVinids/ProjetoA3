@@ -129,7 +129,7 @@ function moveSnake() {
       showNextLevelScreen();
       return;
     }
-    
+
 
     if (score % 10 === 0 && gameSpeed > 50) {
       gameSpeed -= 5;
@@ -214,9 +214,9 @@ function gameOver() {
       .join("") +
     "</ul>";
 
-    document.getElementById("gameOverScreen").style.display = "flex";
-    isWaitingRestart = true;
-    
+  document.getElementById("gameOverScreen").style.display = "flex";
+  isWaitingRestart = true;
+
 }
 
 function restartGame() {
@@ -265,9 +265,9 @@ function showNextLevelScreen() {
       .join("") +
     "</ul>";
 
-    document.getElementById("nextLevelScreen").style.display = "flex";
-    isWaitingNextLevel = true;
-    
+  document.getElementById("nextLevelScreen").style.display = "flex";
+  isWaitingNextLevel = true;
+
 }
 
 function continueToNextLevel() {
@@ -321,7 +321,7 @@ document.addEventListener("keydown", (event) => {
 
   if (event.key === "ArrowUp" && dy === 0) {
     dx = 0;
-    dy = -gridSize; 
+    dy = -gridSize;
   } else if (event.key === "ArrowDown" && dy === 0) {
     dx = 0;
     dy = gridSize;

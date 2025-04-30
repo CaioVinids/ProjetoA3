@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 odsDescription.textContent = info.descricao;
                 odsGameText.textContent = info.conexaoJogo;
                 odsGameImg.src = info.imagemJogo;
-                
+
                 // Limpar e adicionar novas dicas
                 odsRecyclingTips.innerHTML = "";
                 info.dicasReciclagem.forEach(dica => {
