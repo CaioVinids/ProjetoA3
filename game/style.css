@@ -1,3 +1,54 @@
+/* ----------------------- */
+/* HEADER - CORRIGIDO     */
+/* ----------------------- */
+
+.header {
+  background-color: #047857;
+  color: white;
+  width: 100%;
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.inicio-btn {
+  background: white;
+  color: #047857;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  margin-left: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.inicio-btn:hover {
+  background: #e0f2f1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+
 body {
   font-family: Arial, sans-serif;
   background-color: #d1f7d1;
