@@ -1,11 +1,11 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 600;
-canvas.height = 600;
-const foodScale = 1.5;
+canvas.width = 580;
+canvas.height = 580;
+const foodScale = 1.3;
 
-const gridSize = 30;
+const gridSize = 30; // tamanho do objeto no mapa
 let snake = [{ x: 150, y: 150, color: "#4caf50" }];
 let dx = gridSize;
 let dy = 0;
